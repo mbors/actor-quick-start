@@ -1,14 +1,30 @@
 {
-  "title": "Input schema for the apify/quick-start actor.",
+  "title": "Amazon Search",
+  "description": "To update crawler to another site you need to change startUrls and pageFunction options!",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
-    "message": {
-      "title": "Message",
-      "type": "string",
-      "description": "Just enter your hello world message.",
-      "editor": "textfield"
-    }
+      "startUrls": {
+          "title": "Start URLs",
+          "type": "array",
+          "description": "URLs to start with",
+          "prefill": [
+              { "url": " https://www.amazon.com" }
+          ],
+          "editor": "requestListSources"
+      },
+      "searchQuery": {
+        "title": "Search query", 
+        "description": "Enter the keyword which will be used to search through amazon",
+        "example": "iphone"
+      },
+      "pageFunction": {
+          "title": "Page function",
+          "type": "string",
+          "description": "Function executed for each request",
+          "prefill": "async () => {\n  return $('title').text();\n\n}",
+          "editor": "javascript"
+      }
   },
-  "required": []
+  "required": ["startUrls", "pageFunction"]
 }
